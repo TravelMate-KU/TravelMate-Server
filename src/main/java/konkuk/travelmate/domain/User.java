@@ -21,10 +21,7 @@ public class User {
     @Column(name = "phone_num")
     private String phoneNum;
 
-    /**
-     * DISABLED, VOLUNTEER
-     */
-    private String role;
+    private Role role;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "h_id")
