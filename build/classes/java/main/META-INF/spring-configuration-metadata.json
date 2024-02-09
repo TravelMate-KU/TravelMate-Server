@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "spring.security.oauth2.client.registration.google",
+      "type": "konkuk.travelmate.security.GoogleOAuthProperties",
+      "sourceType": "konkuk.travelmate.security.GoogleOAuthProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.security.oauth2.client.registration.google.client-id",
+      "type": "java.lang.String",
+      "sourceType": "konkuk.travelmate.security.GoogleOAuthProperties"
+    },
+    {
+      "name": "spring.security.oauth2.client.registration.google.client-secret",
+      "type": "java.lang.String",
+      "sourceType": "konkuk.travelmate.security.GoogleOAuthProperties"
+    }
+  ],
+  "hints": []
+}
