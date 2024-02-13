@@ -12,7 +12,7 @@ import static jakarta.persistence.FetchType.*;
 public class CourseTravelComponent {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column("c_tc_id")
+    @Column(name = "c_tc_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
