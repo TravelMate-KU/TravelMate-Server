@@ -18,9 +18,9 @@ public class User {
 
     private String password;
 
-    @Column(name = "phone_num")
     private String phoneNum;
 
+    @Enumerated(EnumType.ORDINAL)
     private Role role;
 
     @OneToOne(fetch = FetchType.LAZY)
