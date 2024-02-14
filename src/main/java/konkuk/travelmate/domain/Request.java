@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+
+import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter
@@ -18,24 +18,22 @@ public class Request {
     @Column(name = "r_id")
     private Long requestId;
 
-    private String type;
+    @Enumerated(value = EnumType.ORDINAL)
+    private TravelType type;
 
-    private String state;
+    @Enumerated(value = EnumType.ORDINAL)
+    private RequestState state;
 
-    @Column(name = "start_time")
     private Timestamp startTime;
 
-    @Column(name = "end_time")
     private Timestamp endTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "u_id")
     private User disabled;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "Request2Course",
-            joinColumns = @JoinColumn(name = "r_id"),
-            inverseJoinColumns = @JoinColumn(name = "c_id"))
-    private List<Course> courses;
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "c_id")
+    private Course course;
 
 }
