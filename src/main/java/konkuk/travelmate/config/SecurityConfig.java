@@ -1,38 +1,45 @@
 package konkuk.travelmate.config;
 
 import konkuk.travelmate.security.GoogleOAuthProperties;
+import konkuk.travelmate.security.OAuth2MemberService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.web.SecurityFilterChain;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Configuration
 public class SecurityConfig {
 
+    private final OAuth2MemberService oAuth2MemberService;
+
+    public SecurityConfig(OAuth2MemberService oAuth2MemberService) {
+        this.oAuth2MemberService = oAuth2MemberService;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(CsrfConfigurer::disable)
                 .oauth2Login(o -> o
+                        .loginPage("/login/")
+                        .defaultSuccessUrl("/login/gateway")
+                        .userInfoEndpoint(info -> info
+                                .userService(oAuth2MemberService)
+                        )//로그인 완료 후 회원 정보 받기
                         .clientRegistrationRepository(clientRegistrationRepository())
+
                 )
 
 
-                .authorizeHttpRequests(o->
-                        o.anyRequest().authenticated())
+                .authorizeHttpRequests(o->o
+                        .requestMatchers("/test").authenticated()
+                        .anyRequest().permitAll()
+                )
                 ;
         return http.build();
     }
@@ -48,6 +55,7 @@ public class SecurityConfig {
                 .getBuilder("google")
                 .clientId(googleOAuthProperties().getClientId())
                 .clientSecret(googleOAuthProperties().getClientSecret())
+                .scope("email","profile")
                 .build();
     }
 
