@@ -1,7 +1,6 @@
 package konkuk.travelmate.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,7 +24,6 @@ public class Health {
 
     private Integer depression;
 
-    @Column(name = "bipolar_disorder")
     private Integer bipolarDisorder;
 
     private Integer iq;

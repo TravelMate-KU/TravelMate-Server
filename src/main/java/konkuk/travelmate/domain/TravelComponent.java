@@ -18,9 +18,8 @@ public class TravelComponent {
 
     private String description;
 
-    @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "travel_type")
-    private String travelType;
+    @Enumerated(EnumType.ORDINAL)
+    private TravelType travelType;
 }
