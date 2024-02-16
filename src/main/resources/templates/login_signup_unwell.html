@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="/css/login_signup_unwell.css" />
+    <link rel="stylesheet" href="/css/login_signup_unwell_category.css" />
+  </head>
+  <body>
+    <div class="second">
+      <div class="div">Create an account</div>
+      <p class="text-wrapper">Connect with your friends today!</p>
+      <div class="user-name-field-text">
+        <div class="overlap-group"><div class="text-wrapper-2" th:text="${name}">Default Username</div></div>
+      </div>
+      <div class="email-field-text">
+        <div class="overlap-group"><div class="text-wrapper-2" th:text="${email}">Default Email</div></div>
+      </div>
+      <div class="phone-number-field">
+        <div class="overlap-group"><input type="text" class="text-wrapper-2" placeholder="Enter your phone number" /></div>
+        <!-- <div class="overlap-group"><div class="text-wrapper-2">Google Phone Number</div></div> -->
+      </div>
+    </div>
+
+    <div class="unwell-overlay">
+      <div class="div">
+	<div class="desc-group">
+        <div class="desc-2">Challenged at</div>
+        <div class="navbar">
+          <div class="text-desc">No<br>Help</div>
+          <div class="text-desc">Less<br>Help</div>
+          <div class="text-desc">Some<br>Help</div>
+          <div class="text-desc">Must<br>Help</div>
+        </div>
+	</div>
+        <div class="overlap-group">
+          <div class="desc">
+            <div class="text-wrapper">See</div>
+            <div class="text-wrapper">Walk</div>
+            <div class="text-wrapper">Talk</div>
+            <div class="text-wrapper">Listen</div>
+            <div class="text-wrapper">Intelligence</div>
+            <div class="text-wrapper">Mental</div>
+            <div class="text-wrapper">Depression</div>
+          </div>
+          <div class="component-group">
+          <div class="component cat-see">
+            <div class="rectangle-1"></div>
+            <div class="rectangle-2"></div>
+            <div class="rectangle-3"></div>
+            <div class="rectangle-4"></div>
+          </div>
+          <div class="component cat-walk">
+            <div class="rectangle-1"></div>
+            <div class="rectangle-2"></div>
+            <div class="rectangle-3"></div>
+            <div class="rectangle-4"></div>
+          </div>
+          <div class="component cat-talk">
+            <div class="rectangle-1"></div>
+            <div class="rectangle-2"></div>
+            <div class="rectangle-3"></div>
+            <div class="rectangle-4"></div>
+          </div>
+          <div class="component cat-listen">
+            <div class="rectangle-1"></div>
+            <div class="rectangle-2"></div>
+            <div class="rectangle-3"></div>
+            <div class="rectangle-4"></div>
+          </div>
+          <div class="component cat-intel">
+            <div class="rectangle-1"></div>
+            <div class="rectangle-2"></div>
+            <div class="rectangle-3"></div>
+            <div class="rectangle-4"></div>
+          </div>
+          <div class="component cat-mental">
+            <div class="rectangle-1"></div>
+            <div class="rectangle-2"></div>
+            <div class="rectangle-3"></div>
+            <div class="rectangle-4"></div>
+          </div>
+          <div class="component cat-depre">
+            <div class="rectangle-1"></div>
+            <div class="rectangle-2"></div>
+            <div class="rectangle-3"></div>
+            <div class="rectangle-4"></div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="second">
+      <div class="signup-field-text">
+        <div class="overlap"><div class="text-wrapper-3">Sign Up</div></div>
+      </div>
+    </div>
+
+<script src="/js/login_signup_unwell.js"></script>
+
+  </body>
+</html>
