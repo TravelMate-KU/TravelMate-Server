@@ -31,7 +31,7 @@ console.log(JSON.stringify(data));
 
   // Handle the response
   xhr.onload = function() {
-    location.href="http://localhost:8080/login/disable";
+    location.href="http://localhost:8080/login/volunteer";
     // Check the status code
     if (xhr.status == 200) {
       // Success
