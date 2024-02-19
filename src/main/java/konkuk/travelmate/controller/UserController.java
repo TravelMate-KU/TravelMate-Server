@@ -1,12 +1,17 @@
 package konkuk.travelmate.controller;
 
+import com.nimbusds.jose.shaded.gson.JsonObject;
 import konkuk.travelmate.domain.Health;
 import konkuk.travelmate.domain.Role;
 import konkuk.travelmate.domain.TravelType;
 import konkuk.travelmate.domain.User;
 import konkuk.travelmate.service.UserService;
+import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -36,9 +41,9 @@ public class UserController {
         if (user.isEmpty()) {
             return "redirect:select";
         } else if (user.get().getRole() == Role.DISABLED) {
-            return "disable";
+            return "redirect:disable";
         } else if (user.get().getRole() == Role.VOLUNTEER) {
-            return "volunteer";
+            return "redirect:volunteer";
         }
         return "/error";
     }
@@ -55,9 +60,11 @@ public class UserController {
     }
 
     @PostMapping("/signup/disable")
-    public String signupDisable(@AuthenticationPrincipal OAuth2User oAuth2User,@RequestBody Map<String, String> signupMap){
+    @ResponseBody
+    public Dto signupDisable(@AuthenticationPrincipal OAuth2User oAuth2User, @RequestBody Map<String, String> signupMap){
         userService.joinDisable(oAuth2User,signupMap, Role.DISABLED);
-        return "sucess";
+        Dto dto=new Dto(200);
+        return dto;
     }
 
     @GetMapping("/signup/volunteer")
@@ -68,10 +75,30 @@ public class UserController {
     }
 
     @PostMapping("/signup/volunteer")
-    public String signupVolunteer(@AuthenticationPrincipal OAuth2User oAuth2User,@RequestBody Map<String, String> signupMap){
+    @ResponseBody
+    public Dto signupVolunteer(@AuthenticationPrincipal OAuth2User oAuth2User,@RequestBody Map<String, String> signupMap){
         userService.joinVolunteer(oAuth2User,signupMap, Role.VOLUNTEER);
-        return "sucess";
+        Dto dto=new Dto(200);
+        return dto;
+
     }
 
+    @GetMapping("/disable")
+    public String disableView(){
+        return "disable";
+    }
 
+    @GetMapping("/volunteer")
+    public String volunteerView(){
+        return "volunteer";
+    }
+
+    @Getter
+    public class Dto{
+
+        public Dto(int status){
+            this.status=status;
+        }
+        int status=200;
+    }
 }
