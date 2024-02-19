@@ -1,0 +1,97 @@
+.login-signup {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+//  justify-content: center;
+  width: 100%;
+}
+
+.login-signup .div {
+  background-color: #ffffff;
+//  width: 393px;
+//  height: 852px;
+width:100%;
+  position: relative;
+margin-top:100px;
+}
+
+.login-signup .image {
+  position: relative;
+/*
+  width: 393px;
+  height: 262px;
+  top: 106px;
+  left: 0;
+*/
+  object-fit: cover;
+display:block;
+margin-left:auto;
+margin-right:auto;
+width:90%;
+transition: transform .6s;
+}
+
+.login-signup .image2 {
+  position: relative;
+/*
+  width: 393px;
+  height: 262px;
+  top: 106px;
+  left: 0;
+*/
+  object-fit: cover;
+display:block;
+margin-left:auto;
+margin-right:auto;
+width:80%;
+transition: transform .6s;
+}
+
+.login-signup .text-wrapper {
+  position: relative;
+//  top: 47px;
+//  left: 136px;
+text-align:center;
+  font-family: "Manrope", Helvetica;
+  font-weight: 700;
+  color: #000000;
+font-size: 60px;
+  letter-spacing: 0;
+  line-height: normal;
+margin-bottom:80px;
+}
+
+.login-signup .text-wrapper-2 {
+  position: relative;
+//  top: 380px;
+//  left: 155px;
+text-align:center;
+  font-family: "Manrope", Helvetica;
+  font-weight: 500;
+  color: #000000;
+font-size: 60px;
+  letter-spacing: 0;
+  line-height: normal;
+margin-bottom:120px;
+}
+
+.login-signup .text-wrapper-3 {
+  position: relative;
+//  top: 762px;
+//  left: 139px;
+text-align:center;
+  font-family: "Manrope", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 60px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.overlay_unwell:hover img {
+  transform:scale(1.2);
+}
+
+.overlay_volunteer:hover img{
+  transform:scale(1.2);
+}

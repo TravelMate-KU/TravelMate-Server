@@ -36,4 +36,12 @@ public class Request {
     @JoinColumn(name = "c_id")
     private Course course;
 
+    public Request(TravelType type, RequestState state, Timestamp startTime, Timestamp endTime, User disabled, Course course) {
+        this.type = type;
+        this.state = state;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.disabled = disabled;
+        this.course = course;
+    }
 }
