@@ -52,7 +52,7 @@ jobs:
         if: contains(github.ref, 'main')
         run: |
           docker login -u ${{ secrets.DOCKER_USERID }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -f Dockerfile-dev -t ${{ secrets.DOCKER_USERNAME }}/travelmate .
+          docker build -f Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/travelmate .
           docker push ${{ secrets.DOCKER_USERNAME }}/travelmate
 
       ## deploy to production
