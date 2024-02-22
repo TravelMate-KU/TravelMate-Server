@@ -2,9 +2,11 @@ package konkuk.travelmate.config;
 
 import konkuk.travelmate.security.GoogleOAuthProperties;
 import konkuk.travelmate.security.OAuth2MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -13,13 +15,13 @@ import org.springframework.security.oauth2.client.registration.InMemoryClientReg
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final OAuth2MemberService oAuth2MemberService;
+    private final GoogleOAuthProperties googleOAuthProperties;
 
-    public SecurityConfig(OAuth2MemberService oAuth2MemberService) {
-        this.oAuth2MemberService = oAuth2MemberService;
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -44,17 +46,14 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public GoogleOAuthProperties googleOAuthProperties(){
-        return new GoogleOAuthProperties();
-    }
+
     private ClientRegistration googleOauthClientRegistration() {
 
 
         return CommonOAuth2Provider.GOOGLE
                 .getBuilder("google")
-                .clientId(googleOAuthProperties().getClientId())
-                .clientSecret(googleOAuthProperties().getClientSecret())
+                .clientId(googleOAuthProperties.getClientId())
+                .clientSecret(googleOAuthProperties.getClientSecret())
                 .scope("email","profile")
                 .build();
     }
