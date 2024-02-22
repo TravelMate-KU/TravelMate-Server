@@ -27,7 +27,6 @@ public class UserService {
     }
 
 
-    @Transactional
     public User joinDisable(OAuth2User oAuth2User, Map<String, String> signupMap, Role role) {
         Health health = new Health(Integer.parseInt(signupMap.get("see")), Integer.parseInt(signupMap.get("walk")),
                 Integer.parseInt(signupMap.get("talk")), Integer.parseInt(signupMap.get("listen")), Integer.parseInt(signupMap.get("iq")),
