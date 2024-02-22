@@ -18,10 +18,8 @@ public class Request {
     @Column(name = "r_id")
     private Long requestId;
 
-    @Enumerated(value = EnumType.ORDINAL)
     private TravelType type;
 
-    @Enumerated(value = EnumType.ORDINAL)
     private RequestState state;
 
     private Timestamp startTime;

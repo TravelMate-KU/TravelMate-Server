@@ -20,6 +20,6 @@ public class TravelComponent {
 
     private String imageUrl;
 
-    @Enumerated(EnumType.ORDINAL)
     private TravelType travelType;
+
 }

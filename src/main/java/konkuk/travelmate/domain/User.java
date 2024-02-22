@@ -14,14 +14,16 @@ public class User {
     @Column(name = "u_id")
     private Long userId;
 
+    private String name;
+
     private String email;
 
     private String password;
 
     private String phoneNum;
 
-    @Enumerated(EnumType.ORDINAL)
     private Role role;
+
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "h_id")
