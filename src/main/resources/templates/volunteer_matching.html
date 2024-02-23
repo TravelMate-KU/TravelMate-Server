@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/globals.css"/>
+    <link rel="stylesheet" href="/css/volunteer_matching.css"/>
+    <link rel="stylesheet" href="/css/volunteer_matching_category.css"/>
+    <link rel="stylesheet" href="/css/volunteer_tabbar.css"/>
+    <style>
+        .row {
+            height: 80px; /* Set the desired height for each row */
+            display: flex;
+        }
+
+        .cell {
+            flex: 1;
+            border: 1px solid #ddd; /* Add border for better visibility */
+            box-sizing: border-box;
+            overflow: hidden; /* Prevent overflow */
+        }
+
+        .cell-content {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="volunteer">
+    <div class="div">
+        <div class="logo">
+            <div class="logo-text">Explore Matching</div>
+            <img class="logo-line" src="/img/volunteer/line-5.svg"/>
+        </div>
+
+        <!-- SELECT OPTIONS START -->
+        <div class="unwell-overlay">
+            <div class="div">
+
+                <div class="desc-group">
+                    <div class="desc-2">Challenged at</div>
+                    <div class="navbar">
+                        <div class="text-desc">No<br>Help</div>
+                        <div class="text-desc">Less<br>Help</div>
+                        <div class="text-desc">Some<br>Help</div>
+                        <div class="text-desc">Must<br>Help</div>
+                    </div>
+                </div>
+
+                <div class="overlap-group">
+                    <div class="desc">
+                        <div class="text-wrapper">See</div>
+                        <div class="text-wrapper">Walk</div>
+                        <div class="text-wrapper">Talk</div>
+                        <div class="text-wrapper">Listen</div>
+                        <div class="text-wrapper">Intelligence</div>
+                        <div class="text-wrapper">Mental</div>
+                        <div class="text-wrapper">Depression</div>
+                    </div>
+                    <div class="component-group">
+                        <div class="component cat-see">
+                            <div class="rectangle-1"></div>
+                            <div class="rectangle-2"></div>
+                            <div class="rectangle-3"></div>
+                            <div class="rectangle-4"></div>
+                        </div>
+                        <div class="component cat-walk">
+                            <div class="rectangle-1"></div>
+                            <div class="rectangle-2"></div>
+                            <div class="rectangle-3"></div>
+                            <div class="rectangle-4"></div>
+                        </div>
+                        <div class="component cat-talk">
+                            <div class="rectangle-1"></div>
+                            <div class="rectangle-2"></div>
+                            <div class="rectangle-3"></div>
+                            <div class="rectangle-4"></div>
+                        </div>
+                        <div class="component cat-listen">
+                            <div class="rectangle-1"></div>
+                            <div class="rectangle-2"></div>
+                            <div class="rectangle-3"></div>
+                            <div class="rectangle-4"></div>
+                        </div>
+                        <div class="component cat-intel">
+                            <div class="rectangle-1"></div>
+                            <div class="rectangle-2"></div>
+                            <div class="rectangle-3"></div>
+                            <div class="rectangle-4"></div>
+                        </div>
+                        <div class="component cat-mental">
+                            <div class="rectangle-1"></div>
+                            <div class="rectangle-2"></div>
+                            <div class="rectangle-3"></div>
+                            <div class="rectangle-4"></div>
+                        </div>
+                        <div class="component cat-depre">
+                            <div class="rectangle-1"></div>
+                            <div class="rectangle-2"></div>
+                            <div class="rectangle-3"></div>
+                            <div class="rectangle-4"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SEARCH BUTTON -->
+        <div class="search-button">
+            <div class="search-button-field">
+                <div class="overlap">
+                    <div class="text-wrapper">Search</div>
+                </div>
+            </div>
+        </div>
+        <!-- SELECT OPTIONS END -->
+
+        <!-- TABLE START -->
+        <div class="matching">
+
+            <div class="table-outer">
+                <div class="table-inner">
+                    <div class="row">
+                        <div class="cell-color-title">
+                            <div class="cell-content">
+                                <div class="cell-content-text">Name</div>
+                            </div>
+                        </div>
+                        <div class="cell-color-title">
+                            <div class="cell-content">
+                                <div class="cell-content-text">Type of Help</div>
+                            </div>
+                        </div>
+                        <div class="cell-color-title">
+                            <div class="cell-content">
+                                <div class="cell-content-text">Name of Place</div>
+                            </div>
+                        </div>
+                        <div class="cell-color-title">
+                            <div class="cell-content">
+                                <div class="cell-content-text">Start Date</div>
+                            </div>
+                        </div>
+                        <div class="cell-color-title">
+                            <div class="cell-content">
+                                <div class="cell-content-text">End Date</div>
+                            </div>
+                        </div>
+                        <div class="cell-color-title">
+                            <div class="cell-content">
+                                <div class="cell-content-text">REQUEST</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- @TODO HERE -->
+                    <form action="http://localhost:8080/requests" th:each="request :${requests}" method="post"
+                          class="form">
+                        <div class="row">
+                            <div class="cell">
+                                <div class="cell-content">
+                                    <div class="cell-content-text" th:text="${request.getDisabledName()}"></div>
+                                </div>
+                            </div>
+                            <div class="cell">
+                                <div class="cell-content">
+                                    <div class="cell-content-text" th:text="${request.getRequestsType()}"></div>
+                                </div>
+                            </div>
+                            <div class="cell">
+                                <div class="cell-content">
+                                    <div class="cell-content-text" th:text="${request.getCourseName()}"></div>
+                                </div>
+                            </div>
+                            <div class="cell">
+                                <div class="cell-content">
+                                    <div class="cell-content-text" th:text="${request.getStartTime()}"></div>
+                                </div>
+                            </div>
+                            <div class="cell">
+                                <div class="cell-content">
+                                    <div class="cell-content-text" th:text="${request.getEndTime()}"></div>
+                                </div>
+                            </div>
+                            <div class="cell-color-button request-area">
+                                <div class="cell-content">
+                                    <div class="cell-content-text">REQUEST</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!--<form action="http://localhost:8080/matching/approve" method="post" class="form">
+                    <input type="hidden" class="groupId" name="groupId" value=2222 />
+                    <input type="hidden" class="userId" name="userId" value=2 />
+                    <input type="hidden" class="isVolunteer" name="isVolunteer" value=1 />
+                                <div class="row">
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Moon Jae In</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Transportation</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Blue House</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">2023-01-01</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">2023-12-31</div></div>
+                                  </div>
+                                  <div class="cell-color-button request-area">
+                                    <div class="cell-content"><div class="cell-content-text">REQUEST</div></div>
+                                  </div>
+                                </div>
+                    </form>
+
+                    <form action="http://localhost:8080/matching/approve" method="post" class="form">
+                    <input type="hidden" class="groupId" name="groupId" value=3333 />
+                    <input type="hidden" class="userId" name="userId" value=3 />
+                    <input type="hidden" class="isVolunteer" name="isVolunteer" value=1 />
+                                <div class="row">
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Park Gyun Hae</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Lodgment</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Blue House</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">2023-01-01</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">2023-12-31</div></div>
+                                  </div>
+                                  <div class="cell-color-button request-area">
+                                    <div class="cell-content"><div class="cell-content-text">REQUEST</div></div>
+                                  </div>
+                                </div>
+                    </form>
+
+                    <form action="http://localhost:8080/matching/approve" method="post" class="form">
+                    <input type="hidden" class="groupId" name="groupId" value=4444 />
+                    <input type="hidden" class="userId" name="userId" value=4 />
+                    <input type="hidden" class="isVolunteer" name="isVolunteer" value=1 />
+                                <div class="row">
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Lee Myung Bak</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Restaurant</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Blue House</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">2023-01-01</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">2023-12-31</div></div>
+                                  </div>
+                                  <div class="cell-color-button request-area">
+                                    <div class="cell-content"><div class="cell-content-text">REQUEST</div></div>
+                                  </div>
+                                </div>
+                    </form>
+
+                    <form action="http://localhost:8080/matching/approve" method="post" class="form">
+                    <input type="hidden" class="groupId" name="groupId" value=5555 />
+                    <input type="hidden" class="userId" name="userId" value=5 />
+                    <input type="hidden" class="isVolunteer" name="isVolunteer" value=1 />
+                                <div class="row">
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Noh Moo Hyun</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Travel Site</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">Blue House</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">2023-01-01</div></div>
+                                  </div>
+                                  <div class="cell">
+                                    <div class="cell-content"><div class="cell-content-text">2023-12-31</div></div>
+                                  </div>
+                                  <div class="cell-color-button request-area">
+                                    <div class="cell-content"><div class="cell-content-text">REQUEST</div></div>
+                                  </div>
+                                </div>
+                    </form>-->
+                    <!-- @TODO HERE -->
+                </div>
+            </div>
+
+        </div>
+        <!-- TABLE END -->
+
+        <br><br><br><br>
+
+        <div class="menubar-sudong">
+            <div class="nav-item-sudong" onclick='location.href="http://localhost:8080/matching/volunteer"'>
+                <img class="img-sudong" src="/img/volunteer/find.svg"/>
+                <div class="text-wrapper-sudong">Explore</div>
+            </div>
+            <div class="nav-item-sudong" onclick='location.href="http://localhost:8080/matching/volunteer_result"'>
+                <img class="img-sudong" src="/img/volunteer/table.svg"/>
+                <div class="text-wrapper-sudong">Result</div>
+            </div>
+            <div class="nav-item-sudong" onclick='location.href="volunteer_personalize.html"'>
+                <img class="img-sudong" src="/img/volunteer/recommend.svg"/>
+                <div class="text-wrapper-sudong">Recommend</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="/js/volunteer_matching.js"></script>
+
+</body>
+</html>

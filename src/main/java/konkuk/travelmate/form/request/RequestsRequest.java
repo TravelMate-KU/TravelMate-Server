@@ -1,4 +1,4 @@
-package konkuk.travelmate.form;
+package konkuk.travelmate.form.request;
 
 import konkuk.travelmate.domain.TravelType;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 
 @Getter
 @AllArgsConstructor
-public class RequestForm {
+public class RequestsRequest {
 
     private TravelType type;
 
