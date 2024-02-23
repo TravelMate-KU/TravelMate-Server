@@ -27,7 +27,6 @@ public class UserService {
     }
 
 
-    @Transactional
     public User joinDisable(OAuth2User oAuth2User, Map<String, String> signupMap, Role role) {
         Health health = new Health(Integer.parseInt(signupMap.get("see")), Integer.parseInt(signupMap.get("walk")),
                 Integer.parseInt(signupMap.get("talk")), Integer.parseInt(signupMap.get("listen")), Integer.parseInt(signupMap.get("iq")),
@@ -39,9 +38,7 @@ public class UserService {
     }
 
     public User joinVolunteer(OAuth2User oAuth2User, Map<String, String> signupMap, Role role) {
-        Health health = Health.getDummyHealth();
-        User user = new User(Objects.requireNonNull(oAuth2User.getAttribute("name")), Objects.requireNonNull(oAuth2User.getAttribute("email")), UUID.randomUUID().toString(), signupMap.get("phoneNum"), role, health);
-        healthRepository.save(health);
+        User user = new User(Objects.requireNonNull(oAuth2User.getAttribute("name")), Objects.requireNonNull(oAuth2User.getAttribute("email")), UUID.randomUUID().toString(), signupMap.get("phoneNum"), role, null);
         userRepository.save(user);
         return user;
     }

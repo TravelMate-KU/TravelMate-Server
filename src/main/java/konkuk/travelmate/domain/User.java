@@ -6,7 +6,6 @@ import lombok.*;
 @Entity
 @Getter
 @RequiredArgsConstructor
-@NoArgsConstructor
 @ToString
 public class User {
 
@@ -33,8 +32,16 @@ public class User {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "h_id")
-    @NonNull
     private Health health;
+
+    public User(@NonNull String name, @NonNull String email, @NonNull String password, @NonNull String phoneNum, @NonNull Role role, Health health) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNum = phoneNum;
+        this.role = role;
+        this.health = health;
+    }
 
     public void setHealth(Health health){
         this.health=health;
