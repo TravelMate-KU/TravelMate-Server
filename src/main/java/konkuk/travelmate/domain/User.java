@@ -18,7 +18,6 @@ public class User {
     @NonNull
     private String name;
 
-    @NonNull
     private String email;
 
     @NonNull
@@ -27,7 +26,6 @@ public class User {
     @NonNull
     private String phoneNum;
 
-    @Enumerated(EnumType.ORDINAL)
     @NonNull
     private Role role;
 
