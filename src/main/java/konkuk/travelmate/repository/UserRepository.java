@@ -11,4 +11,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Override
     @EntityGraph(attributePaths = {"health"})
     Optional<User> findById(Long userId);
+
+    Optional<User> findByEmail(String email);
 }

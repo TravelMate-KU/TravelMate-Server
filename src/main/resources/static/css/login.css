@@ -1,0 +1,144 @@
+.login-main {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+//  justify-content: center;
+  width: 100%;
+}
+
+.login-main .div {
+  background-color: #ffffff;
+//  width: 393px;
+width:100%;
+//  height: 852px;
+  position: relative;
+margin-top:200px;
+}
+
+.login-main .overlap {
+/*
+  position: absolute;
+  width: 314px;
+  height: 343px;
+  top: 86px;
+  left: 45px;
+*/
+position : relative;
+margin : 40px;
+}
+
+.login-main .image {
+/*
+  width: 250px;
+  height: 250px;
+  top: 51px;
+  left: 31px;
+  position: absolute;
+*/
+position : relative;
+  object-fit: cover;
+display:block;
+margin-left:auto;
+margin-right:auto;
+width:80%;
+}
+
+.login-main .login-with-google {
+/*
+  position: absolute;
+  width: 314px;
+  height: 48px;
+  top: 295px;
+  left: 0;
+*/
+position : relative;
+display:block;
+margin-left:auto;
+margin-right:auto;
+width:100%;
+}
+
+.login-main .overlap-group {
+  position: relative;
+  width: 70%;
+  height: 108px;
+  background-color: #ffffff05;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #00000066;
+margin-left:auto;
+margin-right:auto;
+}
+
+.login-main .text-wrapper {
+//  position: absolute;
+//  top: 26px;
+//  left: 100px;
+position : relative;
+text-align : center;
+top:28px;
+left:36px;
+  font-family: "Poppins", Helvetica;
+  font-weight: 600;
+  color: #00000099;
+  font-size: 40px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.login-main .google-logo {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  top: 28px;
+  left: 24px;
+  object-fit: cover;
+}
+
+.login-main .img {
+/*
+  width: 300px;
+  height: 52px;
+  top: 0;
+  left: 1px;
+  position: absolute;
+*/
+position : relative;
+  object-fit: cover;
+display:block;
+margin-left:auto;
+margin-right:auto;
+width:90%;
+}
+
+.login-main .already-account {
+  position: absolute;
+  width: 249px;
+  height: 22px;
+  top: 455px;
+  left: 71px;
+}
+
+.login-main .p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "Manrope", Helvetica;
+  font-weight: 600;
+  color: #0d0d0d;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.login-main .text-wrapper-2 {
+  position: absolute;
+  top: 0;
+  left: 186px;
+  font-family: "Manrope", Helvetica;
+  font-weight: 600;
+  color: #160062;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
