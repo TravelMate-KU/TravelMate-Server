@@ -62,7 +62,7 @@ public class RequestController {
 
         List<RequestsResponse> requestsResponses = new ArrayList<>();
         
-        if(searchButtonClicked(walk, see, talk, listen, iq, depression, bipolarDisorder)) {
+        if(isSearchButtonClicked(walk, see, talk, listen, iq, depression, bipolarDisorder)) {
             requestsResponses = requestService.showRequests(walk, see, talk, listen, iq, depression, bipolarDisorder);
         }
 
@@ -71,7 +71,7 @@ public class RequestController {
         return "volunteer_matching";
     }
 
-    private boolean searchButtonClicked(Integer walk, Integer see, Integer talk, Integer listen, Integer iq, Integer depression, Integer bipolarDisorder) {
+    private boolean isSearchButtonClicked(Integer walk, Integer see, Integer talk, Integer listen, Integer iq, Integer depression, Integer bipolarDisorder) {
         return walk != null && see != null && talk != null && listen != null && iq != null && depression != null && bipolarDisorder != null;
     }
 
