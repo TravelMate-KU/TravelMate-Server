@@ -6,8 +6,6 @@ import lombok.Getter;
 
 import java.sql.Timestamp;
 
-@Getter
-@AllArgsConstructor
 public record RequestsResponse(String disabledName, TravelType requestsType, String courseName, Timestamp startTime, Timestamp endTime) {
 
 }
