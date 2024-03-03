@@ -8,12 +8,6 @@ import java.sql.Timestamp;
 
 @Getter
 @AllArgsConstructor
-public class RequestsResponse {
-
-    private String disabledName;
-    private TravelType requestsType;
-    private String courseName;
-    private Timestamp startTime;
-    private Timestamp endTime;
+public record RequestsResponse(String disabledName, TravelType requestsType, String courseName, Timestamp startTime, Timestamp endTime) {
 
 }
