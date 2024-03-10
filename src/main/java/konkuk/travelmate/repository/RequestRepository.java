@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
-    @Query("SELECT new konkuk.travelmate.form.response.RequestsResponse(d.name, r.type, c.name, r.startTime, r.endTime)" +
+    @Query("SELECT new konkuk.travelmate.form.response.RequestsResponse(r.requestId, d.name, r.type, c.name, r.startTime, r.endTime)" +
             "FROM Request r " +
             "join r.course c  " +
             "join c.health h " +

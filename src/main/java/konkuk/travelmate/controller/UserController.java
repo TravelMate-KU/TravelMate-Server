@@ -43,7 +43,7 @@ public class UserController {
         } else if (user.get().getRole() == Role.DISABLED) {
             return "redirect:disable";
         } else if (user.get().getRole() == Role.VOLUNTEER) {
-            return "redirect:volunteer";
+            return "redirect:/requests";
         }
         return "/error";
     }

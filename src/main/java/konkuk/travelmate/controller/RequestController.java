@@ -7,6 +7,8 @@ import konkuk.travelmate.service.RequestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Controller
@@ -69,6 +72,22 @@ public class RequestController {
         model.addAttribute("requests", requestsResponses);
 
         return "volunteer_matching";
+    }
+
+    /**
+     * 봉사자 -> 장애인 요청 수락
+     * 매칭 생성
+     */
+    @PostMapping("/requests/{requestId}/matchings")
+    public String acceptDisabledRequest(@PathVariable Long requestId, @AuthenticationPrincipal OAuth2User user) {
+
+        log.info("[RequestController.acceptDisabledRequest]");
+
+        String email = Objects.requireNonNull(user.getAttribute("email")).toString();
+
+        requestService.acceptDisabledRequest(requestId, email);
+
+        return "redirect:/matchings";
     }
 
     private boolean isSearchButtonClicked(Integer walk, Integer see, Integer talk, Integer listen, Integer iq, Integer depression, Integer bipolarDisorder) {

@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Matching {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "m_id")
@@ -24,4 +23,10 @@ public class Matching {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "r_id")
     private Request request;
+
+    public Matching(Integer rating, User volunteer, Request request) {
+        this.rating = rating;
+        this.volunteer = volunteer;
+        this.request = request;
+    }
 }

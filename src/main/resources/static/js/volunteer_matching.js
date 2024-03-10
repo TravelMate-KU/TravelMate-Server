@@ -301,23 +301,40 @@ var buttons = document.querySelectorAll('.request-area');
 
 // Loop through the button elements
 for (var i = 0; i < buttons.length; i++) {
-  // Add an event listener to each button element
-  buttons[i].addEventListener('click', function(event) {
-    // Prevent the default behavior of the button element
-    event.preventDefault();
-    // Get the parent element of the button element
-    var parent = event.target.parentElement;
-    // While the parent element is not a form element
-    while (parent.tagName !== 'FORM') {
-      // Get the parent element of the parent element
-      parent = parent.parentElement;
-    }
-    // Submit the parent form element
-console.log(parent);
-    parent.submit();
-
-    parent.style.display="none";
-    alert("Matching Requested");
-    //location.href="volunteer_matching.html";
-  });
+    // Add an event listener to each button element
+    buttons[i].addEventListener('click', function(event) {
+        // Prevent the default behavior of the button element
+        event.preventDefault();
+        // Get the parent form element of the button element
+        var form = event.target.closest('form');
+        // Get the requestId from the form
+        var requestId = form.querySelector('input[name="requestId"]').value;
+        // Construct the URL with the requestId
+        var url = 'http://localhost:8080/requests/' + requestId + "/matchings";
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        // Open a POST request to the specified URL
+        xhr.open('POST', url);
+        // Set the onload event handler
+        xhr.onload = function() {
+            // Check if the request was successful
+            if (xhr.status == 200) {
+                // Redirect to the specified URL
+                window.location.href = 'http://localhost:8080/matchings';
+            } else {
+                // Log the error message
+                console.error('Error:', xhr.statusText);
+                // Display an alert message
+                alert('Error occurred while processing the request.');
+            }
+        };
+        // Send the request
+        xhr.send();
+        // Log the URL for debugging
+        console.log('POST request sent to:', url);
+        // Hide the parent form element
+        form.style.display = 'none';
+        // Display an alert message
+        alert('Matching Requested');
+    });
 }
