@@ -310,11 +310,24 @@ for (var i = 0; i < buttons.length; i++) {
         // Get the requestId from the form
         var requestId = form.querySelector('input[name="requestId"]').value;
         // Construct the URL with the requestId
-        var url = 'http://localhost:8080/requests/' + requestId;
+        var url = 'http://localhost:8080/requests/' + requestId + "/matchings";
         // Create a new XMLHttpRequest object
         var xhr = new XMLHttpRequest();
         // Open a POST request to the specified URL
         xhr.open('POST', url);
+        // Set the onload event handler
+        xhr.onload = function() {
+            // Check if the request was successful
+            if (xhr.status == 200) {
+                // Redirect to the specified URL
+                window.location.href = 'http://localhost:8080/matchings';
+            } else {
+                // Log the error message
+                console.error('Error:', xhr.statusText);
+                // Display an alert message
+                alert('Error occurred while processing the request.');
+            }
+        };
         // Send the request
         xhr.send();
         // Log the URL for debugging
@@ -323,7 +336,5 @@ for (var i = 0; i < buttons.length; i++) {
         form.style.display = 'none';
         // Display an alert message
         alert('Matching Requested');
-        // Redirect to another page if needed
-        // window.location.href = 'volunteer_matching.html';
     });
 }
