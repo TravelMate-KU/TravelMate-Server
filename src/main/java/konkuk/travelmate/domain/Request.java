@@ -42,4 +42,8 @@ public class Request {
         this.disabled = disabled;
         this.course = course;
     }
+
+    public void changeStateToWait() {
+        this.state = RequestState.WAIT;
+    }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <link rel="stylesheet" href="/css/globals.css"/>
     <link rel="stylesheet" href="/css/volunteer_matching.css"/>
@@ -153,32 +153,33 @@
                     </div>
 
                     <!-- @TODO HERE -->
-                    <form action="http://localhost:8080/requests" th:each="request :${requests}" method="post"
+                    <form action="http://localhost:8080/requests/" th:each="request :${requests}" method="post"
                           class="form">
+                        <input type="hidden" name="requestId" th:value="${request.requestId()}"/>
                         <div class="row">
                             <div class="cell">
                                 <div class="cell-content">
-                                    <div class="cell-content-text" th:text="${request.getDisabledName()}"></div>
+                                    <div class="cell-content-text" th:text="${request.disabledName()}"></div>
                                 </div>
                             </div>
                             <div class="cell">
                                 <div class="cell-content">
-                                    <div class="cell-content-text" th:text="${request.getRequestsType()}"></div>
+                                    <div class="cell-content-text" th:text="${request.requestsType()}"></div>
                                 </div>
                             </div>
                             <div class="cell">
                                 <div class="cell-content">
-                                    <div class="cell-content-text" th:text="${request.getCourseName()}"></div>
+                                    <div class="cell-content-text" th:text="${request.courseName()}"></div>
                                 </div>
                             </div>
                             <div class="cell">
                                 <div class="cell-content">
-                                    <div class="cell-content-text" th:text="${request.getStartTime()}"></div>
+                                    <div class="cell-content-text" th:text="${request.startTime()}"></div>
                                 </div>
                             </div>
                             <div class="cell">
                                 <div class="cell-content">
-                                    <div class="cell-content-text" th:text="${request.getEndTime()}"></div>
+                                    <div class="cell-content-text" th:text="${request.endTime()}"></div>
                                 </div>
                             </div>
                             <div class="cell-color-button request-area">
