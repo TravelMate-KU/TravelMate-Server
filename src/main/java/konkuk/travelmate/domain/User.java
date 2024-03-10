@@ -7,6 +7,7 @@ import lombok.*;
 @Getter
 @RequiredArgsConstructor
 @ToString
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -40,6 +41,7 @@ public class User {
         this.role = role;
         this.health = health;
     }
+
 
     public void setHealth(Health health){
         this.health=health;
