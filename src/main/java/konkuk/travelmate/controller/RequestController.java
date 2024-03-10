@@ -7,6 +7,7 @@ import konkuk.travelmate.service.RequestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,7 +79,7 @@ public class RequestController {
      * 매칭 생성
      */
     @PostMapping("/requests/{requestId}")
-    public void acceptDisabledRequest(@PathVariable Long requestId, OAuth2User user) {
+    public String acceptDisabledRequest(@PathVariable Long requestId, @AuthenticationPrincipal OAuth2User user) {
 
         log.info("[RequestController.acceptDisabledRequest]");
 
@@ -86,6 +87,7 @@ public class RequestController {
 
         requestService.acceptDisabledRequest(requestId, email);
 
+        return "redirect:/matchings";
     }
 
     private boolean isSearchButtonClicked(Integer walk, Integer see, Integer talk, Integer listen, Integer iq, Integer depression, Integer bipolarDisorder) {
