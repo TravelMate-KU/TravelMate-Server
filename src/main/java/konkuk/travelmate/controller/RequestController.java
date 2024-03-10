@@ -78,7 +78,7 @@ public class RequestController {
      * 봉사자 -> 장애인 요청 수락
      * 매칭 생성
      */
-    @PostMapping("/requests/{requestId}")
+    @PostMapping("/requests/{requestId}/matchings")
     public String acceptDisabledRequest(@PathVariable Long requestId, @AuthenticationPrincipal OAuth2User user) {
 
         log.info("[RequestController.acceptDisabledRequest]");
