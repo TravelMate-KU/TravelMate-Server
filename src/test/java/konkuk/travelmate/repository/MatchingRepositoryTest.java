@@ -17,7 +17,7 @@ class MatchingRepositoryTest {
 
     @Autowired MatchingRepository matchingRepository;
     @Autowired HealthRepository healthRepository;
-    @Autowired UserRepository UserRepository;
+    @Autowired UserRepository userRepository;
     @Autowired CourseRepository courseRepository;
     @Autowired RequestRepository requestRepository;
 
@@ -29,7 +29,7 @@ class MatchingRepositoryTest {
         Health health = new Health(1L, 0, 0, 0, 0, 0, 0, 0);
         healthRepository.save(health);
         User disabled = new User(1L, "d1", "d1@gmail.com", "d1", "01012341234", Role.DISABLED, health);
-        UserRepository.save(disabled);
+        userRepository.save(disabled);
 
         Health health2 = new Health(2L, 0, 0, 0, 0, 0, 0, 0);
         healthRepository.save(health2);
@@ -43,7 +43,7 @@ class MatchingRepositoryTest {
 
 
         User volunteer = new User(2L, "v1", "v1@gmail.com", "v1", "01012341234", Role.VOLUNTEER, null);
-        UserRepository.save(volunteer);
+        userRepository.save(volunteer);
 
         Request request = new Request(1L, TravelType.ALL, RequestState.WAIT, Timestamp.valueOf("2024-02-22 14:54:00"),
                 Timestamp.valueOf("2024-02-22 14:54:00"), disabled, course);
