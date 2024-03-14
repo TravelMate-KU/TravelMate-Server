@@ -8,7 +8,6 @@ import konkuk.travelmate.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.util.Objects;
@@ -19,28 +18,28 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserService {
 
-    public final UserRepository userRepository;
+    public final UserRepository UserRepository;
     public final HealthRepository healthRepository;
 
     public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return UserRepository.findByEmail(email);
     }
 
 
-    public User joinDisable(OAuth2User oAuth2User, Map<String, String> signupMap, Role role) {
+    public User joinDisable(OAuth2User OAuth2User, Map<String, String> signupMap, Role role) {
         Health health = new Health(Integer.parseInt(signupMap.get("see")), Integer.parseInt(signupMap.get("walk")),
                 Integer.parseInt(signupMap.get("talk")), Integer.parseInt(signupMap.get("listen")), Integer.parseInt(signupMap.get("iq")),
                 Integer.parseInt(signupMap.get("bipolar_disorder")), Integer.parseInt(signupMap.get("depression")));
-        User user = new User(Objects.requireNonNull(oAuth2User.getAttribute("name")), Objects.requireNonNull(oAuth2User.getAttribute("email")), UUID.randomUUID().toString(), signupMap.get("phoneNum"), role, health);
+        User User = new User(Objects.requireNonNull(OAuth2User.getAttribute("name")), Objects.requireNonNull(OAuth2User.getAttribute("email")), UUID.randomUUID().toString(), signupMap.get("phoneNum"), role, health);
         healthRepository.save(health);
-        userRepository.save(user);
-        return user;
+        UserRepository.save(User);
+        return User;
     }
 
-    public User joinVolunteer(OAuth2User oAuth2User, Map<String, String> signupMap, Role role) {
-        User user = new User(Objects.requireNonNull(oAuth2User.getAttribute("name")), Objects.requireNonNull(oAuth2User.getAttribute("email")), UUID.randomUUID().toString(), signupMap.get("phoneNum"), role, null);
-        userRepository.save(user);
-        return user;
+    public User joinVolunteer(OAuth2User OAuth2User, Map<String, String> signupMap, Role role) {
+        User User = new User(Objects.requireNonNull(OAuth2User.getAttribute("name")), Objects.requireNonNull(OAuth2User.getAttribute("email")), UUID.randomUUID().toString(), signupMap.get("phoneNum"), role, null);
+        UserRepository.save(User);
+        return User;
     }
 
 }

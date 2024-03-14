@@ -1,25 +1,16 @@
 package konkuk.travelmate.controller;
 
-import com.nimbusds.jose.shaded.gson.JsonObject;
-import konkuk.travelmate.domain.Health;
 import konkuk.travelmate.domain.Role;
-import konkuk.travelmate.domain.TravelType;
 import konkuk.travelmate.domain.User;
 import konkuk.travelmate.service.UserService;
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Map;
 import java.util.Optional;
 
