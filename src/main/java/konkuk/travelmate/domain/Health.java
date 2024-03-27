@@ -1,15 +1,13 @@
 package konkuk.travelmate.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
 @RequiredArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Health {
 
     @Id
@@ -37,9 +35,5 @@ public class Health {
 
     @NonNull
     private Integer iq;
-
-    public static Health getDummyHealth(){
-        return new Health(0,0,0,0,0,0,0);
-    }
 
 }
