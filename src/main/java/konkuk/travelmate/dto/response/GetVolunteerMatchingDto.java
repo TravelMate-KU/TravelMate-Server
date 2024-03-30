@@ -1,4 +1,4 @@
-package konkuk.travelmate.form.response;
+package konkuk.travelmate.dto.response;
 
 import konkuk.travelmate.domain.RequestState;
 import konkuk.travelmate.domain.TravelType;

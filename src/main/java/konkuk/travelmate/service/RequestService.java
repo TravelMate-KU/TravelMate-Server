@@ -1,8 +1,8 @@
 package konkuk.travelmate.service;
 
 import konkuk.travelmate.domain.*;
-import konkuk.travelmate.form.request.PostRequestDto;
-import konkuk.travelmate.form.response.GetRequestsDto;
+import konkuk.travelmate.dto.request.PostRequestDto;
+import konkuk.travelmate.dto.response.GetRequestsDto;
 import konkuk.travelmate.repository.CourseRepository;
 import konkuk.travelmate.repository.MatchingRepository;
 import konkuk.travelmate.repository.RequestRepository;

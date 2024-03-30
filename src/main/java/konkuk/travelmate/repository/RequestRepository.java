@@ -1,7 +1,7 @@
 package konkuk.travelmate.repository;
 
 import konkuk.travelmate.domain.Request;
-import konkuk.travelmate.form.response.GetRequestsDto;
+import konkuk.travelmate.dto.response.GetRequestsDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
-    @Query("SELECT new konkuk.travelmate.form.response.GetRequestsDto(r.requestId, d.name, r.type, c.name, r.startTime, r.endTime)" +
+    @Query("SELECT new konkuk.travelmate.dto.response.GetRequestsDto(r.requestId, d.name, r.type, c.name, r.startTime, r.endTime)" +
             "FROM Request r " +
             "join r.course c  " +
             "join c.health h " +

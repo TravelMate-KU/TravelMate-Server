@@ -1,6 +1,6 @@
 package konkuk.travelmate.controller;
 
-import konkuk.travelmate.form.response.GetVolunteerMatchingDto;
+import konkuk.travelmate.dto.response.GetVolunteerMatchingDto;
 import konkuk.travelmate.service.MatchingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
