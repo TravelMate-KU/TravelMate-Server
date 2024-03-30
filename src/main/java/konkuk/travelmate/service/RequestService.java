@@ -1,8 +1,8 @@
 package konkuk.travelmate.service;
 
 import konkuk.travelmate.domain.*;
-import konkuk.travelmate.dto.request.PostRequestDto;
-import konkuk.travelmate.dto.response.GetRequestsDto;
+import konkuk.travelmate.dto.request.PostRequestRequest;
+import konkuk.travelmate.dto.response.GetRequestsResponse;
 import konkuk.travelmate.repository.CourseRepository;
 import konkuk.travelmate.repository.MatchingRepository;
 import konkuk.travelmate.repository.RequestRepository;
@@ -24,7 +24,7 @@ public class RequestService {
     private final CourseRepository courseRepository;
     private final MatchingRepository matchingRepository;
 
-    public void requestMatching(Long disabledId, Long courseId, PostRequestDto requestForm) {
+    public void requestMatching(Long disabledId, Long courseId, PostRequestRequest requestForm) {
 
         log.info("[RequestService.requestMatching]");
 
@@ -35,7 +35,7 @@ public class RequestService {
         requestRepository.save(request);
     }
 
-    public List<GetRequestsDto> showRequests(int walk, int see, int talk, int listen, int iq, int depression, int bipolarDisorder) {
+    public List<GetRequestsResponse> showRequests(int walk, int see, int talk, int listen, int iq, int depression, int bipolarDisorder) {
         log.info("[RequestService.showRequests]");
         return requestRepository.findRequestsByStateAndHealthLevel(walk, see, talk, listen, iq, depression, bipolarDisorder);
     }
