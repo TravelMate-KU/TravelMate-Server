@@ -48,8 +48,9 @@ public class RequestService {
         request.changeStateToWait();
 
         User user = userRepository.findByEmail(volunteerEmail).orElseThrow(() -> new RuntimeException("user not found"));
+        Matching matching = Matching.createNullRatingMatching(user, request);
 
-        matchingRepository.save(new Matching(null, user, request));
+        matchingRepository.save(matching);
     }
 
 }

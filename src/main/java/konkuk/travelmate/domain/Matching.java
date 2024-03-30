@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Matching {
 
     @Id
@@ -27,9 +26,13 @@ public class Matching {
     @JoinColumn(name = "r_id")
     private Request request;
 
-    public Matching(Integer rating, User volunteer, Request request) {
+    private Matching(Integer rating, User volunteer, Request request) {
         this.rating = rating;
         this.volunteer = volunteer;
         this.request = request;
+    }
+
+    public static Matching createNullRatingMatching(User volunteer, Request request) {
+        return new Matching(null, volunteer, request);
     }
 }
