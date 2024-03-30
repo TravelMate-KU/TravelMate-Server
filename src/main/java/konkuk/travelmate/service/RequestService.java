@@ -1,6 +1,7 @@
 package konkuk.travelmate.service;
 
 import konkuk.travelmate.domain.*;
+import konkuk.travelmate.dto.request.GetRequestsRequest;
 import konkuk.travelmate.dto.request.PostRequestRequest;
 import konkuk.travelmate.dto.response.GetRequestsResponse;
 import konkuk.travelmate.repository.CourseRepository;
@@ -35,9 +36,11 @@ public class RequestService {
         requestRepository.save(request);
     }
 
-    public List<GetRequestsResponse> showRequests(int walk, int see, int talk, int listen, int iq, int depression, int bipolarDisorder) {
+    public List<GetRequestsResponse> showRequests(GetRequestsRequest request) {
         log.info("[RequestService.showRequests]");
-        return requestRepository.findRequestsByStateAndHealthLevel(walk, see, talk, listen, iq, depression, bipolarDisorder);
+        return requestRepository.findRequestsByStateAndHealthLevel(
+                request.walk(), request.see(), request.talk(), request.listen(), request.iq(), request.depression(), request.bipolarDisorder()
+        );
     }
 
     @Transactional

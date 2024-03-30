@@ -1,7 +1,7 @@
 package konkuk.travelmate.repository;
 
 import konkuk.travelmate.domain.*;
-import konkuk.travelmate.form.response.VolunteerMatchingResponse;
+import konkuk.travelmate.dto.response.GetVolunteerMatchingResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +62,7 @@ class MatchingRepositoryTest {
         String email = volunteer.getEmail();
 
         //when
-        List<VolunteerMatchingResponse> matchings = matchingRepository.findVolunteerMatchingResultsByEmail(email);
+        List<GetVolunteerMatchingResponse> matchings = matchingRepository.findVolunteerMatchingResultsByEmail(email);
 
         //then
         assertThat(matchings).hasSize(2)
