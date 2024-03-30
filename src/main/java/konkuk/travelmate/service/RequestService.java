@@ -18,6 +18,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class RequestService {
 
     private final RequestRepository requestRepository;
@@ -25,6 +26,7 @@ public class RequestService {
     private final CourseRepository courseRepository;
     private final MatchingRepository matchingRepository;
 
+    @Transactional
     public void requestMatching(Long disabledId, Long courseId, PostRequestRequest requestForm) {
 
         log.info("[RequestService.requestMatching]");
