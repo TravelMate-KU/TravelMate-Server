@@ -1,6 +1,6 @@
 package konkuk.travelmate.controller;
 
-import konkuk.travelmate.form.response.VolunteerMatchingResponse;
+import konkuk.travelmate.form.response.GetVolunteerMatchingDto;
 import konkuk.travelmate.service.MatchingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class MatchingController {
 
         log.info("[MatchingController.showMatchResults]");
         String email = Objects.requireNonNull(user.getAttribute("email")).toString();
-        List<VolunteerMatchingResponse> matchings = matchingService.getMatchResults(email);
+        List<GetVolunteerMatchingDto> matchings = matchingService.getMatchResults(email);
         model.addAttribute("matchings", matchings);
 
         return "volunteer_matching_result";

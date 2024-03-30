@@ -1,6 +1,6 @@
 package konkuk.travelmate.service;
 
-import konkuk.travelmate.form.response.VolunteerMatchingResponse;
+import konkuk.travelmate.form.response.GetVolunteerMatchingDto;
 import konkuk.travelmate.repository.MatchingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ public class MatchingService {
 
     private final MatchingRepository matchingRepository;
 
-    public List<VolunteerMatchingResponse> getMatchResults(String email) {
+    public List<GetVolunteerMatchingDto> getMatchResults(String email) {
         log.info("[MatchingService.getMatchResults]");
         return matchingRepository.findVolunteerMatchingResultsByEmail(email);
     }
