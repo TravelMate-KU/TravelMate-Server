@@ -12,11 +12,11 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class MatchingService {
 
     private final MatchingRepository matchingRepository;
 
+    @Transactional(readOnly = true)
     public List<GetVolunteerMatchingResponse> getMatchResults(String email) {
         log.info("[MatchingService.getMatchResults]");
         return matchingRepository.findVolunteerMatchingResultsByEmail(email);

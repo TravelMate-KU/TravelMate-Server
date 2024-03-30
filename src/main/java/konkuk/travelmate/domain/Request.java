@@ -10,7 +10,6 @@ import static jakarta.persistence.FetchType.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Request {
 
     @Id
@@ -35,7 +34,7 @@ public class Request {
     private Course course;
 
     @Builder
-    public Request(TravelType type, RequestState state, Timestamp startTime, Timestamp endTime, User disabled, Course course) {
+    private Request(TravelType type, RequestState state, Timestamp startTime, Timestamp endTime, User disabled, Course course) {
         this.type = type;
         this.state = state;
         this.startTime = startTime;
