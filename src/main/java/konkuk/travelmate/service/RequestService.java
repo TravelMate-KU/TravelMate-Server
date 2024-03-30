@@ -30,16 +30,9 @@ public class RequestService {
 
         User disabled = userRepository.findById(disabledId).orElseThrow(() -> new RuntimeException("user not found"));
         Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("course not found"));
+        Request request = requestForm.toEntity(disabled, course);
 
-        requestRepository.save(
-                new Request(
-                        requestForm.getType(),
-                        RequestState.PENDING,
-                        requestForm.getStartTime(),
-                        requestForm.getEndTime(),
-                        disabled,
-                        course));
-
+        requestRepository.save(request);
     }
 
     public List<RequestsResponse> showRequests(int walk, int see, int talk, int listen, int iq, int depression, int bipolarDisorder) {
