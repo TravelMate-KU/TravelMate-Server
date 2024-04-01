@@ -251,7 +251,7 @@ console.log(JSON.stringify(data));
 var xhr = new XMLHttpRequest();
 
 // 파라미터를 쿼리 스트링 형식으로 변환
-var params = "see=" + see + "&walk=" + walk + "&talk=" + talk + "&listen=" + listen + "&iq=" + iq + "&bipolar_disorder=" + bipolar_disorder + "&depression=" + depression;
+var params = "see=" + see + "&walk=" + walk + "&talk=" + talk + "&listen=" + listen + "&iq=" + iq + "&depression=" + depression + "&bipolarDisorder=" + bipolar_disorder;
 
 // 요청 URL 설정
 var url = "http://localhost:8080/requests";

@@ -14,6 +14,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import static java.lang.Integer.*;
+import static java.util.Objects.*;
+import static java.util.UUID.*;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -27,19 +31,21 @@ public class UserService {
 
 
     public User joinDisable(OAuth2User OAuth2User, Map<String, String> signupMap, Role role) {
-        Health health = new Health(Integer.parseInt(signupMap.get("see")), Integer.parseInt(signupMap.get("walk")),
-                Integer.parseInt(signupMap.get("talk")), Integer.parseInt(signupMap.get("listen")), Integer.parseInt(signupMap.get("iq")),
-                Integer.parseInt(signupMap.get("bipolar_disorder")), Integer.parseInt(signupMap.get("depression")));
-        User User = new User(Objects.requireNonNull(OAuth2User.getAttribute("name")), Objects.requireNonNull(OAuth2User.getAttribute("email")), UUID.randomUUID().toString(), signupMap.get("phoneNum"), role, health);
+        Health health = Health.of(signupMap);
+        User user = User.of(requireNonNull(OAuth2User.getAttribute("name")).toString(),
+                requireNonNull(OAuth2User.getAttribute("email")).toString(),
+                randomUUID().toString(), signupMap.get("phoneNum"), role, health);
         healthRepository.save(health);
-        UserRepository.save(User);
-        return User;
+        UserRepository.save(user);
+        return user;
     }
 
     public User joinVolunteer(OAuth2User OAuth2User, Map<String, String> signupMap, Role role) {
-        User User = new User(Objects.requireNonNull(OAuth2User.getAttribute("name")), Objects.requireNonNull(OAuth2User.getAttribute("email")), UUID.randomUUID().toString(), signupMap.get("phoneNum"), role, null);
-        UserRepository.save(User);
-        return User;
+        User user = User.of(requireNonNull(OAuth2User.getAttribute("name")).toString(),
+                requireNonNull(OAuth2User.getAttribute("email")),
+                randomUUID().toString(),signupMap.get("phoneNum"), role, null);
+        UserRepository.save(user);
+        return user;
     }
 
 }

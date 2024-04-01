@@ -1,15 +1,11 @@
 package konkuk.travelmate.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Course {
 
     @Id
@@ -29,4 +25,12 @@ public class Course {
     @JoinColumn(name = "h_id")
     private Health health;
 
+    @Builder
+    private Course(String name, String region, String description, String imageUrl, Health health) {
+        this.name = name;
+        this.region = region;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.health = health;
+    }
 }

@@ -3,11 +3,13 @@ package konkuk.travelmate.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Map;
+
+import static java.lang.Integer.parseInt;
+
 @Entity
 @Getter
-@RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Health {
 
     @Id
@@ -15,25 +17,40 @@ public class Health {
     @Column(name = "h_id")
     private Long healthId;
 
-    @NonNull
     private Integer walk;
 
-    @NonNull
     private Integer see;
 
-    @NonNull
     private Integer talk;
 
-    @NonNull
     private Integer listen;
 
-    @NonNull
     private Integer depression;
 
-    @NonNull
     private Integer bipolarDisorder;
 
-    @NonNull
     private Integer iq;
 
+    @Builder
+    private Health(Integer walk, Integer see, Integer talk, Integer listen, Integer depression, Integer bipolarDisorder, Integer iq) {
+        this.walk = walk;
+        this.see = see;
+        this.talk = talk;
+        this.listen = listen;
+        this.depression = depression;
+        this.bipolarDisorder = bipolarDisorder;
+        this.iq = iq;
+    }
+
+    public static Health of(Map<String, String> signupMap) {
+        return Health.builder()
+                .walk(parseInt(signupMap.get("walk")))
+                .see(parseInt(signupMap.get("see")))
+                .talk(parseInt(signupMap.get("talk")))
+                .listen(parseInt(signupMap.get("listen")))
+                .depression(parseInt(signupMap.get("depression")))
+                .bipolarDisorder(parseInt(signupMap.get("bipolarDisorder")))
+                .iq(parseInt(signupMap.get("iq")))
+                .build();
+    }
 }

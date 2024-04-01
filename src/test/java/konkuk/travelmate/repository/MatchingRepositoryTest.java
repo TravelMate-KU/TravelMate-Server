@@ -1,7 +1,7 @@
 package konkuk.travelmate.repository;
 
 import konkuk.travelmate.domain.*;
-import konkuk.travelmate.form.response.VolunteerMatchingResponse;
+import konkuk.travelmate.dto.response.GetVolunteerMatchingResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,43 +26,33 @@ class MatchingRepositoryTest {
     void findVolunteerMatchingResultsByEmail() {
 
         //given
-        Health health = new Health(1L, 0, 0, 0, 0, 0, 0, 0);
-        healthRepository.save(health);
-        User disabled = new User(1L, "d1", "d1@gmail.com", "d1", "01012341234", Role.DISABLED, health);
-        userRepository.save(disabled);
+        Health health = createHealth(0, 0, 0, 0, 0, 0, 0);
+        Health health2 = createHealth(0, 0, 0, 0, 0, 0, 0);
+        Health health3 = createHealth(0, 0, 0, 0, 0, 0, 0);
+        healthRepository.saveAll(List.of(health, health2, health3));
 
-        Health health2 = new Health(2L, 0, 0, 0, 0, 0, 0, 0);
-        healthRepository.save(health2);
-        Course course = new Course(1L, "서울여행", "서울", "서울여행123", "asdf@ewaf.com", health2);
-        courseRepository.save(course);
+        User disabled = createUser("d1", "d1@gmail.com", "d1", "01012341234", Role.DISABLED, health);
+        User volunteer = createUser( "v1", "v1@gmail.com", "v1", "01012341234", Role.VOLUNTEER, null);
+        userRepository.saveAll(List.of(disabled, volunteer));
 
-        Health health3 = new Health(3L, 0, 0, 0, 0, 0, 0, 0);
-        healthRepository.save(health3);
-        Course course2 = new Course(2L, "부산여행", "부산", "부산여행123", "asdf@ewaf.com", health3);
-        courseRepository.save(course2);
+        Course course = createCourse("서울여행", "서울", "서울여행123", "asdf@ewaf.com", health2);
+        Course course2 = createCourse("부산여행", "부산", "부산여행123", "asdf@ewaf.com", health3);
+        courseRepository.saveAll(List.of(course, course2));
 
-
-        User volunteer = new User(2L, "v1", "v1@gmail.com", "v1", "01012341234", Role.VOLUNTEER, null);
-        userRepository.save(volunteer);
-
-        Request request = new Request(1L, TravelType.ALL, RequestState.WAIT, Timestamp.valueOf("2024-02-22 14:54:00"),
+        Request request = createRequest(TravelType.ALL, RequestState.WAIT, Timestamp.valueOf("2024-02-22 14:54:00"),
                 Timestamp.valueOf("2024-02-22 14:54:00"), disabled, course);
-        requestRepository.save(request);
-
-        Request request2 = new Request(2L, TravelType.LODGING, RequestState.SUCCESS, Timestamp.valueOf("2024-02-22 14:54:00"),
+        Request request2 = createRequest(TravelType.LODGING, RequestState.SUCCESS, Timestamp.valueOf("2024-02-22 14:54:00"),
                 Timestamp.valueOf("2024-02-22 14:54:00"), disabled, course);
-        requestRepository.save(request2);
+        requestRepository.saveAll(List.of(request, request2));
 
-        Matching matching = new Matching(1L, 0, volunteer, request);
-        matchingRepository.save(matching);
-
-        Matching matching2 = new Matching(2L, 0, volunteer, request2);
-        matchingRepository.save(matching2);
+        Matching matching = Matching.createNullRatingMatching(volunteer, request);
+        Matching matching2 = Matching.createNullRatingMatching(volunteer, request2);
+        matchingRepository.saveAll(List.of(matching, matching2));
 
         String email = volunteer.getEmail();
 
         //when
-        List<VolunteerMatchingResponse> matchings = matchingRepository.findVolunteerMatchingResultsByEmail(email);
+        List<GetVolunteerMatchingResponse> matchings = matchingRepository.findVolunteerMatchingResultsByEmail(email);
 
         //then
         assertThat(matchings).hasSize(2)
@@ -73,5 +63,49 @@ class MatchingRepositoryTest {
                         tuple("d1", Timestamp.valueOf("2024-02-22 14:54:00"), Timestamp.valueOf("2024-02-22 14:54:00"),
                                 TravelType.LODGING, RequestState.SUCCESS, "01012341234", "d1@gmail.com")
                 );
+    }
+
+    private Health createHealth(int walk, int see, int talk, int listen, int depression, int bipolarDisorder, int iq) {
+        return Health.builder()
+                .walk(walk)
+                .see(see)
+                .talk(talk)
+                .listen(listen)
+                .depression(depression)
+                .bipolarDisorder(bipolarDisorder)
+                .iq(iq)
+                .build();
+    }
+
+    private User createUser(String name, String email, String password, String phoneNum, Role role, Health health) {
+        return User.builder()
+                .name(name)
+                .email(email)
+                .password(password)
+                .phoneNum(phoneNum)
+                .role(role)
+                .health(health)
+                .build();
+    }
+
+    private Course createCourse(String name, String description, String region, String imageUrl, Health health) {
+        return Course.builder()
+                .name(name)
+                .description(description)
+                .region(region)
+                .imageUrl(imageUrl)
+                .health(health)
+                .build();
+    }
+
+    private Request createRequest(TravelType type, RequestState state, Timestamp startTime, Timestamp endTime, User disabled, Course course) {
+        return Request.builder()
+                .type(type)
+                .state(state)
+                .startTime(startTime)
+                .endTime(endTime)
+                .disabled(disabled)
+                .course(course)
+                .build();
     }
 }

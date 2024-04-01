@@ -1,8 +1,9 @@
 package konkuk.travelmate.service;
 
 import konkuk.travelmate.domain.*;
-import konkuk.travelmate.form.request.RequestsRequest;
-import konkuk.travelmate.form.response.RequestsResponse;
+import konkuk.travelmate.dto.request.GetRequestsRequest;
+import konkuk.travelmate.dto.request.PostRequestRequest;
+import konkuk.travelmate.dto.response.GetRequestsResponse;
 import konkuk.travelmate.repository.CourseRepository;
 import konkuk.travelmate.repository.MatchingRepository;
 import konkuk.travelmate.repository.RequestRepository;
@@ -24,27 +25,23 @@ public class RequestService {
     private final CourseRepository courseRepository;
     private final MatchingRepository matchingRepository;
 
-    public void requestMatching(Long disabledId, Long courseId, RequestsRequest requestForm) {
+    public void requestMatching(Long disabledId, Long courseId, PostRequestRequest requestForm) {
 
         log.info("[RequestService.requestMatching]");
 
         User disabled = userRepository.findById(disabledId).orElseThrow(() -> new RuntimeException("user not found"));
         Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("course not found"));
+        Request request = requestForm.toEntity(disabled, course);
 
-        requestRepository.save(
-                new Request(
-                        requestForm.getType(),
-                        RequestState.PENDING,
-                        requestForm.getStartTime(),
-                        requestForm.getEndTime(),
-                        disabled,
-                        course));
-
+        requestRepository.save(request);
     }
 
-    public List<RequestsResponse> showRequests(int walk, int see, int talk, int listen, int iq, int depression, int bipolarDisorder) {
+    @Transactional(readOnly = true)
+    public List<GetRequestsResponse> showRequests(GetRequestsRequest request) {
         log.info("[RequestService.showRequests]");
-        return requestRepository.findRequestsByStateAndHealthLevel(walk, see, talk, listen, iq, depression, bipolarDisorder);
+        return requestRepository.findRequestsByStateAndHealthLevel(
+                request.walk(), request.see(), request.talk(), request.listen(), request.iq(), request.depression(), request.bipolarDisorder()
+        );
     }
 
     @Transactional
@@ -55,8 +52,9 @@ public class RequestService {
         request.changeStateToWait();
 
         User user = userRepository.findByEmail(volunteerEmail).orElseThrow(() -> new RuntimeException("user not found"));
+        Matching matching = Matching.createNullRatingMatching(user, request);
 
-        matchingRepository.save(new Matching(null, user, request));
+        matchingRepository.save(matching);
     }
 
 }

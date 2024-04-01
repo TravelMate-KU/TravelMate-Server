@@ -1,10 +1,7 @@
 package konkuk.travelmate.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 
@@ -13,7 +10,6 @@ import static jakarta.persistence.FetchType.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Request {
 
     @Id
@@ -37,7 +33,8 @@ public class Request {
     @JoinColumn(name = "c_id")
     private Course course;
 
-    public Request(TravelType type, RequestState state, Timestamp startTime, Timestamp endTime, User disabled, Course course) {
+    @Builder
+    private Request(TravelType type, RequestState state, Timestamp startTime, Timestamp endTime, User disabled, Course course) {
         this.type = type;
         this.state = state;
         this.startTime = startTime;

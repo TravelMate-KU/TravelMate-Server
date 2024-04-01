@@ -6,7 +6,6 @@ import lombok.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class User {
 
     @Id
@@ -14,31 +13,39 @@ public class User {
     @Column(name = "u_id")
     private Long userId;
 
-    @NonNull
     private String name;
 
     private String email;
 
-    @NonNull
     private String password;
 
-    @NonNull
     private String phoneNum;
 
-    @NonNull
     private Role role;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "h_id")
     private Health health;
 
-    public User(@NonNull String name, @NonNull String email, @NonNull String password, @NonNull String phoneNum, @NonNull Role role, Health health) {
+    @Builder
+    private User(String name, String email, String password, String phoneNum, Role role, Health health) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phoneNum = phoneNum;
         this.role = role;
         this.health = health;
+    }
+
+    public static User of(String name, String email, String string, String phoneNum, Role role, Health health) {
+        return User.builder()
+                .name(name)
+                .email(email)
+                .password(builder().password)
+                .phoneNum(phoneNum)
+                .role(role)
+                .health(health)
+                .build();
     }
 
 
