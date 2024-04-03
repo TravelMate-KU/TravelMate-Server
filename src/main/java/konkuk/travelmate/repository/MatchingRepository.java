@@ -14,6 +14,6 @@ public interface MatchingRepository extends JpaRepository<Matching, Long> {
             "WHERE d.role = 0 AND r.requestId IN ( " +
             "SELECT m.request.requestId " +
             "FROM Matching m JOIN m.volunteer v " +
-            "WHERE v.email = :email)")
+            "WHERE v.email = :email AND m.request.state <> 2)")
     List<GetVolunteerMatchingResponse> findVolunteerMatchingResultsByEmail(@Param("email") String email);
 }

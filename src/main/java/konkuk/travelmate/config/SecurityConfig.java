@@ -3,10 +3,12 @@ package konkuk.travelmate.config;
 import konkuk.travelmate.security.GoogleOAuthProperties;
 import konkuk.travelmate.security.OAuth2MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -28,7 +30,7 @@ public class SecurityConfig {
         http
                 .csrf(CsrfConfigurer::disable)
                 .oauth2Login(o -> o
-                        .loginPage("/login/")
+                        .loginPage("/login")
                         .defaultSuccessUrl("/login/gateway")
                         .userInfoEndpoint(info -> info
                                 .userService(oAuth2MemberService)
@@ -39,13 +41,13 @@ public class SecurityConfig {
 
 
                 .authorizeHttpRequests(o->o
-                        .requestMatchers("/test").authenticated()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/login/**").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 ;
         return http.build();
     }
-
 
     private ClientRegistration googleOauthClientRegistration() {
 
