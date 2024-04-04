@@ -32,20 +32,27 @@ public class UserService {
 
     public User joinDisable(OAuth2User OAuth2User, Map<String, String> signupMap, Role role) {
         Health health = Health.of(signupMap);
-        User user = User.of(requireNonNull(OAuth2User.getAttribute("name")).toString(),
-                requireNonNull(OAuth2User.getAttribute("email")).toString(),
-                randomUUID().toString(), signupMap.get("phoneNum"), role, health);
+        User user = buildUser(OAuth2User, signupMap, role, health);
         healthRepository.save(health);
         UserRepository.save(user);
         return user;
     }
 
     public User joinVolunteer(OAuth2User OAuth2User, Map<String, String> signupMap, Role role) {
-        User user = User.of(requireNonNull(OAuth2User.getAttribute("name")).toString(),
-                requireNonNull(OAuth2User.getAttribute("email")),
-                randomUUID().toString(),signupMap.get("phoneNum"), role, null);
+        User user = buildUser(OAuth2User, signupMap, role, null);
         UserRepository.save(user);
         return user;
+    }
+
+    private User buildUser(OAuth2User OAuth2User, Map<String, String> signupMap, Role role, Health health) {
+        return User.builder()
+                .name(requireNonNull(OAuth2User.getAttribute("name")).toString())
+                .email(requireNonNull(OAuth2User.getAttribute("email")).toString())
+                .password(randomUUID().toString())
+                .phoneNum(signupMap.get("phoneNum"))
+                .role(role)
+                .health(health)
+                .build();
     }
 
 }

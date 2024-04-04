@@ -37,18 +37,6 @@ public class User {
         this.health = health;
     }
 
-    public static User of(String name, String email, String string, String phoneNum, Role role, Health health) {
-        return User.builder()
-                .name(name)
-                .email(email)
-                .password(builder().password)
-                .phoneNum(phoneNum)
-                .role(role)
-                .health(health)
-                .build();
-    }
-
-
     public void setHealth(Health health){
         this.health=health;
     }
